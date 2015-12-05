@@ -30,14 +30,26 @@ public class BeverageFragment extends Fragment {
     private EditText mPriceField;
     private CheckBox mActiveCheckBox;
 
+    private static final String ARG_BEVERAGE_ID = "beverage_id";        // Used with newInstance()
+
+    // Gets a new BeverageFragment.
+    public static BeverageFragment newInstance(String beverageID) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_BEVERAGE_ID, beverageID);
+
+        BeverageFragment beverageFragment = new BeverageFragment();
+        beverageFragment.setArguments(args);
+        return beverageFragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Retrieve beverageID of item in RecyclerView that started this activity
-        String beverageID = (String) getActivity().getIntent().getStringExtra(BeverageActivity.EXTRA_BEVERAGE_ID);
+        String beverageID = (String) getArguments().getSerializable(ARG_BEVERAGE_ID);
 
-        // Retrieve the beverage by the ID you just got
+        // Retrieve the beverage using the ID you just got
         mBeverage = Beverages.get(getActivity()).getBeverageById(beverageID);
     }
 

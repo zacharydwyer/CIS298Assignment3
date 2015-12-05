@@ -41,10 +41,28 @@ public class BeverageListFragment extends Fragment {
         return myView;
     }
 
+    // Creates a whole new adapter and assigns it a data set if first time; else, just lets the adapter know that the data set was updated.
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
-        List<Beverage> beverageList = Beverages.get(getActivity()).getBeverages();       // Get list of beverages
-        mBeverageAdapter = new BeverageAdapter(beverageList);               // Create a new Adapter using the beverageList
-        mRecyclerView.setAdapter(mBeverageAdapter);                         // Give the RecyclerView this new adapter to work with
+        List<Beverage> beverageList = Beverages.get(getActivity()).getBeverages();      // Get list of beverages
+
+        // If there hasn't even been an adapter created
+        if(mBeverageAdapter == null) {
+            mBeverageAdapter = new BeverageAdapter(beverageList);                           // Create a brand new Adapter using the beverageList
+            mRecyclerView.setAdapter(mBeverageAdapter);                                     // Give the RecyclerView this new adapter to work with
+        }
+        else {
+            // There's already an adapter there - just let the adapter know that the data set changed - it will reload the data set.
+            mBeverageAdapter.notifyDataSetChanged();
+        }
+
+
+
     }
 
     //////////////////////////////////
@@ -89,7 +107,6 @@ public class BeverageListFragment extends Fragment {
         public void onClick(View v) {
             Intent intentToStartBeverageActivity = BeverageActivity.newIntent(getActivity(), mBeverage.getID());        // Get appropriate intent to start activity
             startActivity(intentToStartBeverageActivity);                                                               // Actually start the activity
-
         }
     }
 
