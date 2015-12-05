@@ -83,7 +83,7 @@ public class BeverageListFragment extends Fragment {
         /* On Click Listener for ViewHolder */
         @Override
         public void onClick(View v) {
-            Intent intentToStartBeverageActivity = new Intent(getActivity(), BeverageActivity.class);       // Intent to start the BeverageActivity
+            Intent intentToStartBeverageActivity = BeverageActivity.newIntent(getActivity(), mBeverage.getID());        // Get appropriate intent to start activity
             startActivity(intentToStartBeverageActivity);       // Actually start the activity
 
         }

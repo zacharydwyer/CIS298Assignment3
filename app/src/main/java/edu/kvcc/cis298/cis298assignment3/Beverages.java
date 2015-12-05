@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import android.util.Log;
 
 // Singleton class representing the main collection of Beverages.
 public class Beverages {
@@ -30,7 +31,7 @@ public class Beverages {
 
     private void getBeveragesFromCSVFile(Context context) {         // Needs context in order to access resources
         // Create input stream from csv file
-        InputStream is = context.getResources().openRawResource(R.raw.BeverageList);
+        InputStream is = context.getResources().openRawResource(R.raw.beverage_list);
 
         // Create a scanner that can be used to look at this stream
         Scanner myScanner = new Scanner(is);
@@ -38,11 +39,20 @@ public class Beverages {
         // Set the delimiter
         myScanner.useDelimiter(",");
 
+        //TODO: Remove this
+        int numberOfLines = 0;
+
         // While the scanner has something to look at...
         while (myScanner.hasNext()) {
 
             // Get the tokens; split using comma
             String[] tokens = myScanner.nextLine().split(",");
+
+            String length = Integer.toString(tokens.length);
+            String finalString = "tokensSize: " + length;
+            Log.d("Who cares", finalString);
+            numberOfLines++;
+            Log.d("Who else cares", Integer.toString(numberOfLines));
 
             // Example: 12401,20/20 Red Grape,750 ml,74.23,False
 
@@ -82,6 +92,7 @@ public class Beverages {
     // Private constructor to protect from being instantiated explicitly
     private Beverages(Context context) {
         mBeverages = new ArrayList<>();         // Create new list of beverages - this is the first time this singleton has been made
+        getBeveragesFromCSVFile(context);
     }
 
 }
