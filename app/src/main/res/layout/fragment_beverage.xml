@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Used by BeverageFragment -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_marginLeft="16dp"
+              android:layout_marginRight="16dp"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        android:textSize="32dp"
+        android:textColor="#575757"
+        android:text="@string/beverage_title"
+        />
+    <EditText
+        android:id="@+id/beverage_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/beverage_name_hint"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:textSize="26dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="9dp"
+                android:text="@string/beverage_id_label"
+                android:layout_column="1" />
+
+            <EditText
+                android:id="@+id/beverage_id_field"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/beverage_id_hint"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:textSize="26dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="9dp"
+                android:text="@string/beverage_pack_label"
+                android:layout_column="1" />
+
+            <EditText
+                android:id="@+id/beverage_pack_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/beverage_pack_hint"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:textSize="26dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="9dp"
+                android:text="@string/beverage_price_label"
+                android:layout_column="1" />
+
+            <EditText
+                android:id="@+id/beverage_price_field"
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/beverage_price_hint"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:textSize="26dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="9dp"
+                android:text="@string/beverage_active_label"
+                android:layout_column="1" />
+
+            <CheckBox
+                android:id="@+id/beverage_active_checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="4dp"
+                />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

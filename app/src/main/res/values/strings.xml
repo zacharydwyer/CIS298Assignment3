@@ -1,0 +1,22 @@
+<resources>
+    <!-- Auto generated strings -->
+    <string name="app_name">Beverage Manager</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- BeverageActivity strings -->
+    <string name="beverage_title">Name</string>
+    <string name="beverage_name_hint">Enter beverage name</string>
+
+    <string name="beverage_id_label">Id:</string>
+    <string name="beverage_id_hint">Enter a beverage ID</string>
+
+    <string name="beverage_pack_label">Pack:</string>
+    <string name="beverage_pack_hint">Enter a beverage Pack</string>
+
+    <string name="beverage_price_label">Price:</string>
+    <string name="beverage_price_hint">Enter a beverage Price</string>
+
+    <string name="beverage_active_label">Active:</string>
+
+</resources>
