@@ -5,7 +5,7 @@ public class Beverage {
 
     // Beverage properties
     private String mName;
-    private int mID;
+    private String mID;
     private String mPack;
     private double mPrice;
     private boolean mIsActive;
@@ -25,11 +25,11 @@ public class Beverage {
         mName = name;
     }
 
-    public int getID() {
+    public String getID() {
         return mID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         mID = ID;
     }
 

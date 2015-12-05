@@ -2,9 +2,7 @@ package edu.kvcc.cis298.cis298assignment3;
 
 import android.content.Context;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +19,7 @@ public class Beverages {
     }
 
     // Get a Beverage by using its ID
-    public Beverage getBeverageById(int id) {
+    public Beverage getBeverageById(String id) {
         for (Beverage beverage : mBeverages) {
             if (beverage.getID() == id) {
                 return beverage;
@@ -30,12 +28,7 @@ public class Beverages {
         return null;
     }
 
-    /* SINGLETON IMPLEMENTATION BELOW HERE */
-
-    // Singleton instance of Beverages
-    public static Beverages sBeverages;
-
-    private static void loadBeveragesFromCSV(Context context) {
+    private void getBeveragesFromCSVFile(Context context) {         // Needs context in order to access resources
         // Create input stream from csv file
         InputStream is = context.getResources().openRawResource(R.raw.BeverageList);
 
@@ -47,15 +40,36 @@ public class Beverages {
 
         // While the scanner has something to look at...
         while (myScanner.hasNext()) {
+
+            // Get the tokens; split using comma
             String[] tokens = myScanner.nextLine().split(",");
 
             // Example: 12401,20/20 Red Grape,750 ml,74.23,False
 
             // Using the tokens we just got, divvy them up
+            String id = tokens[0];
+            String name = tokens[1];
+            String pack = tokens[2];
+            double price = Double.parseDouble(tokens[3]);
+            boolean isActive = Boolean.parseBoolean(tokens[4]);
 
+            // Use this information to create a new Beverage
+            Beverage newBeverage = new Beverage();
+            newBeverage.setID(id);
+            newBeverage.setName(name);
+            newBeverage.setPack(pack);
+            newBeverage.setPrice(price);
+            newBeverage.setIsActive(isActive);
 
+            // Finally, add this beverage to the beverage list (NOT THE CSV FILE THOUGH)
+            this.mBeverages.add(newBeverage);
         }
     }
+
+    /* SINGLETON IMPLEMENTATION BELOW HERE */
+
+    // Singleton instance of Beverages
+    public static Beverages sBeverages;
 
     // Get the Beverages list
     public static Beverages get(Context context) {

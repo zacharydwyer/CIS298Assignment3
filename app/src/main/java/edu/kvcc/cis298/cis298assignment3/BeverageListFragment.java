@@ -1,5 +1,6 @@
 package edu.kvcc.cis298.cis298assignment3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -40,7 +41,7 @@ public class BeverageListFragment extends Fragment {
     }
 
     private void updateUI() {
-        List<Beverage> beverageList = Beverages.get().getBeverages();       // Get list of beverages
+        List<Beverage> beverageList = Beverages.get(getActivity()).getBeverages();       // Get list of beverages
         mBeverageAdapter = new BeverageAdapter(beverageList);               // Create a new Adapter using the beverageList
         mRecyclerView.setAdapter(mBeverageAdapter);                         // Give the RecyclerView this new adapter to work with
     }
@@ -48,7 +49,7 @@ public class BeverageListFragment extends Fragment {
     //////////////////////////////////
     //////// VIEW HOLDER /////////////
     //////////////////////////////////
-    private class BeverageViewHolder extends RecyclerView.ViewHolder {      // Literally holds a set of views
+    private class BeverageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {      // Literally holds a set of views
 
         /* BEVERAGE WE ACQUIRE FROM bindBeverage) */
         private Beverage mBeverage;
@@ -60,6 +61,9 @@ public class BeverageListFragment extends Fragment {
 
         public BeverageViewHolder(View itemView) {
             super(itemView);
+
+            /* SET ONCLICKLISTENER FOR VIEW WITHIN VIEWHOLDER*/
+            itemView.setOnClickListener(this);
 
             /* GET REFERENCES TO WIDGETS */
             mNameTextView = (TextView) itemView.findViewById(R.id.list_item_name_text_view);
@@ -74,6 +78,14 @@ public class BeverageListFragment extends Fragment {
             mNameTextView.setText(mBeverage.getName());
             mIDTextView.setText(mBeverage.getName());
             mPriceTextView.setText(String.format("{0:C2}", mBeverage.getPrice()));      // Format decimal into a $ text amount
+        }
+
+        /* On Click Listener for ViewHolder */
+        @Override
+        public void onClick(View v) {
+            Intent intentToStartBeverageActivity = new Intent(getActivity(), BeverageActivity.class);       // Intent to start the BeverageActivity
+            startActivity(intentToStartBeverageActivity);       // Actually start the activity
+
         }
     }
 

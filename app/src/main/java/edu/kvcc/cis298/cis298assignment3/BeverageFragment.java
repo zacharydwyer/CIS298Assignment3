@@ -78,17 +78,17 @@ public class BeverageFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // WARNING - IT MUST be made sure that the inputted ID is unique, or else it will probably screw something up.
 
-                int inputtedNumber = Integer.parseInt(s.toString());    // What the user just inputted. Will always resolve to a number considering the widget data input restriction
+                String inputtedID = s.toString();    // What the user just inputted.
 
                 // If there is not already a beverage with this ID...
-                if (Beverages.get().getBeverageById(inputtedNumber) != null) {
-                    mBeverage.setID(inputtedNumber);
+                if (Beverages.get(getActivity()).getBeverageById(inputtedID) != null) {
+                    mBeverage.setID(inputtedID);
                 }
                 else {
                     mIDField.setError("ID already in use");
                 }
                 
-                mBeverage.setID(Integer.parseInt(s.toString()));                            // "s" will always evaluate to a valid integer - the widget has android:inputType="number"
+                mBeverage.setID(s.toString());
             }
 
             @Override
