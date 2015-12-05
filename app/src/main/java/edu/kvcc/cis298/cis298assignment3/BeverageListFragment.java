@@ -49,11 +49,31 @@ public class BeverageListFragment extends Fragment {
     //////// VIEW HOLDER /////////////
     //////////////////////////////////
     private class BeverageViewHolder extends RecyclerView.ViewHolder {      // Literally holds a set of views
-        public TextView mNameTextView;
+
+        /* BEVERAGE WE ACQUIRE FROM bindBeverage) */
+        private Beverage mBeverage;
+
+        /* WIDGETS WE'RE WORKING WITH */
+        private TextView mNameTextView;
+        private TextView mIDTextView;
+        private TextView mPriceTextView;
 
         public BeverageViewHolder(View itemView) {
             super(itemView);
-            mNameTextView = (TextView) itemView;
+
+            /* GET REFERENCES TO WIDGETS */
+            mNameTextView = (TextView) itemView.findViewById(R.id.list_item_name_text_view);
+            mIDTextView = (TextView) itemView.findViewById(R.id.list_item_id_text_view);
+            mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_price_text_view);
+
+        }
+
+        // Set the widget's text in this ViewHolder to the corresponding Beverage's properties
+        public void bindBeverage(Beverage beverage) {
+            mBeverage = beverage;
+            mNameTextView.setText(mBeverage.getName());
+            mIDTextView.setText(mBeverage.getName());
+            mPriceTextView.setText(String.format("{0:C2}", mBeverage.getPrice()));      // Format decimal into a $ text amount
         }
     }
 
@@ -70,7 +90,7 @@ public class BeverageListFragment extends Fragment {
         @Override
         public BeverageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());         // Get the layout inflater from the activity
-            View myView = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            View myView = layoutInflater.inflate(R.layout.list_item_beverage, parent, false);
             return new BeverageViewHolder(myView);
         }
 
