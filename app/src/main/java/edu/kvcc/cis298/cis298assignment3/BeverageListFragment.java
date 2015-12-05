@@ -48,7 +48,7 @@ public class BeverageListFragment extends Fragment {
     //////////////////////////////////
     //////// VIEW HOLDER /////////////
     //////////////////////////////////
-    private class BeverageViewHolder extends RecyclerView.ViewHolder {
+    private class BeverageViewHolder extends RecyclerView.ViewHolder {      // Literally holds a set of views
         public TextView mNameTextView;
 
         public BeverageViewHolder(View itemView) {
