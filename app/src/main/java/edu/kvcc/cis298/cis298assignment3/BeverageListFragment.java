@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -69,22 +70,25 @@ public class BeverageListFragment extends Fragment {
             mNameTextView = (TextView) itemView.findViewById(R.id.list_item_name_text_view);
             mIDTextView = (TextView) itemView.findViewById(R.id.list_item_id_text_view);
             mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_price_text_view);
-
         }
 
         // Bind a Beverage's properties to the corresponding widget text properties
         public void bindBeverage(Beverage beverage) {
             mBeverage = beverage;
             mNameTextView.setText(mBeverage.getName());
-            mIDTextView.setText(mBeverage.getName());
-            mPriceTextView.setText(String.format("{0:C2}", mBeverage.getPrice()));      // Format decimal into a $ text amount
+            mIDTextView.setText(mBeverage.getID());
+
+            // Format money amount
+            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+            String moneyString = currencyFormatter.format(mBeverage.getPrice());
+            mPriceTextView.setText(moneyString);
         }
 
         /* On Click Listener for ViewHolder */
         @Override
         public void onClick(View v) {
             Intent intentToStartBeverageActivity = BeverageActivity.newIntent(getActivity(), mBeverage.getID());        // Get appropriate intent to start activity
-            startActivity(intentToStartBeverageActivity);       // Actually start the activity
+            startActivity(intentToStartBeverageActivity);                                                               // Actually start the activity
 
         }
     }
@@ -109,7 +113,7 @@ public class BeverageListFragment extends Fragment {
         @Override
         public void onBindViewHolder(BeverageViewHolder holder, int position) {
             Beverage beverage = mBeverageList.get(position);            // Get beverage from list at this position
-            holder.mNameTextView.setText(beverage.getName());           // Set the text of the "name" textview to the name of the beverage in that position of the list
+            holder.bindBeverage(beverage);
         }
 
         @Override

@@ -13,6 +13,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -31,8 +33,12 @@ public class BeverageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBeverage = new Beverage();             // Create new associated Beverage
 
+        // Retrieve beverageID of item in RecyclerView that started this activity
+        String beverageID = (String) getActivity().getIntent().getStringExtra(BeverageActivity.EXTRA_BEVERAGE_ID);
+
+        // Retrieve the beverage by the ID you just got
+        mBeverage = Beverages.get(getActivity()).getBeverageById(beverageID);
     }
 
     @Nullable
@@ -46,6 +52,18 @@ public class BeverageFragment extends Fragment {
         mPackField = (EditText)v.findViewById(R.id.beverage_pack_field);
         mPriceField = (EditText)v.findViewById(R.id.beverage_price_field);
         mActiveCheckBox = (CheckBox)v.findViewById(R.id.beverage_active_checkBox);
+
+        /* ASSIGN PRESET PROPERTIES */
+        mNameField.setText(mBeverage.getName());
+        mIDField.setText(mBeverage.getID());
+        mPackField.setText(mBeverage.getPack());
+
+        // Format money amount
+        NumberFormat decimalFormatter = new DecimalFormat("#0.00");
+        String formattedNumber = (decimalFormatter.format(mBeverage.getPrice()));
+        mPriceField.setText(formattedNumber);
+
+        mActiveCheckBox.setChecked(mBeverage.isActive());
 
         /* ASSIGN WIDGET LISTENERS */
 
@@ -78,17 +96,19 @@ public class BeverageFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // WARNING - IT MUST be made sure that the inputted ID is unique, or else it will probably screw something up.
 
-                String inputtedID = s.toString();    // What the user just inputted.
+                // If we can't find a beverage with the given id
+                if (Beverages.get(getActivity()).getBeverageById(s.toString()) == null) {
 
-                // If there is not already a beverage with this ID...
-                if (Beverages.get(getActivity()).getBeverageById(inputtedID) != null) {
-                    mBeverage.setID(inputtedID);
+                    // Set the id to the input
+                    mBeverage.setID(s.toString());
+
+                    // Reset the error if necessary
+                    mIDField.setError(null);
                 }
                 else {
+                    // Beverage with given ID was found, set error
                     mIDField.setError("ID already in use");
                 }
-                
-                mBeverage.setID(s.toString());
             }
 
             @Override
@@ -116,7 +136,7 @@ public class BeverageFragment extends Fragment {
         });
 
         // On Price field text change...
-        mIDField.addTextChangedListener(new TextWatcher() {
+        mPriceField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // BLANK
@@ -124,7 +144,6 @@ public class BeverageFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //TODO: Should it be checking to make sure every ID is unique?
                 mBeverage.setPrice(Double.parseDouble(s.toString()));                            // "s" will always evaluate to a valid double - the widget has android:inputType="numberDecimal"
             }
 

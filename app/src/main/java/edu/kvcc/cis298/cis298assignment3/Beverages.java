@@ -22,7 +22,7 @@ public class Beverages {
     // Get a Beverage by using its ID
     public Beverage getBeverageById(String id) {
         for (Beverage beverage : mBeverages) {
-            if (beverage.getID() == id) {
+            if (beverage.getID().equals(id)) {
                 return beverage;
             }
         }
@@ -47,12 +47,6 @@ public class Beverages {
 
             // Get the tokens; split using comma
             String[] tokens = myScanner.nextLine().split(",");
-
-            String length = Integer.toString(tokens.length);
-            String finalString = "tokensSize: " + length;
-            Log.d("Who cares", finalString);
-            numberOfLines++;
-            Log.d("Who else cares", Integer.toString(numberOfLines));
 
             // Example: 12401,20/20 Red Grape,750 ml,74.23,False
 
