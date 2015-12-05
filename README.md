@@ -1,7 +1,7 @@
 # Assignment 3 - Master Detail Wine List with Fragments
 
 ## Author
-
+Zachary Dwyer
 
 
 ## Description
@@ -47,9 +47,18 @@ Solution Requirements:
 The book does not cover how to read in a CSV file, however, it should be fairly easy to find on the internet. If more help is needed, we can do something in class.
 
 ## Outside Resources Used
-
-
+* Defining shadows on elements [http://developer.android.com/training/material/shadows-clipping.html]
+* Double formatting [http://stackoverflow.com/questions/12806278/double-decimal-formatting-in-java]
+* Double currency formatting [http://stackoverflow.com/questions/2379221/java-currency-number-format]
+* Looking at the callstack while debugging [http://stackoverflow.com/questions/21071960/android-studio-where-can-i-see-callstack-while-debugging-an-android-app]
+* Working with setError on an EditText [http://stackoverflow.com/questions/11640772/edittext-seterror-message-does-not-clear-after-input]
+* using "getResources()" [http://stackoverflow.com/questions/8238588/how-to-call-getresources-from-a-class-which-has-no-context]
+* Parsing CSV file [http://stackoverflow.com/questions/5360628/get-and-parse-csv-file-in-android]
+* Scanner vs BufferedReader [http://stackoverflow.com/questions/2231369/scanner-vs-bufferedreader]
+* Using Scanner 1 [http://stackoverflow.com/questions/11871520/how-can-i-read-input-from-the-console-using-the-scanner-class-in-java]
+* Using Scanner 2 [http://www.javabeat.net/parsing-input-using-scanner/]
+* Using Scanner 3 [http://stackoverflow.com/questions/14214206/splitting-up-data-file-in-java-scanner]
 
 ## Known Problems, Issues, And/Or Errors in the Program
-
+* On rotate, error appears in detail view
 
