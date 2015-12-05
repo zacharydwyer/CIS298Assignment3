@@ -68,7 +68,7 @@ public class BeverageListFragment extends Fragment {
 
         }
 
-        // Set the widget's text in this ViewHolder to the corresponding Beverage's properties
+        // Bind a Beverage's properties to the corresponding widget text properties
         public void bindBeverage(Beverage beverage) {
             mBeverage = beverage;
             mNameTextView.setText(mBeverage.getName());
