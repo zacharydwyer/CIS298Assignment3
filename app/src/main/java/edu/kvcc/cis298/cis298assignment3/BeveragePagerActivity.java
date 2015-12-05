@@ -22,9 +22,9 @@ public class BeveragePagerActivity extends FragmentActivity {
     private List<Beverage> mBeverageList;
 
     // Used to create an Intent that starts this Activity.
-    public static Intent newIntent(Context packageContext, String crimeID) {
+    public static Intent newIntent(Context packageContext, String beverageID) {
         Intent intentToStartSelf = new Intent(packageContext, BeveragePagerActivity.class);     // Intent to start this class
-        intentToStartSelf.putExtra(EXTRA_BEVERAGE_ID, crimeID);                                 // Store given crimeID
+        intentToStartSelf.putExtra(EXTRA_BEVERAGE_ID, beverageID);                                 // Store given beverageID
         return intentToStartSelf;                                                               // Return appropriate, configured intent
     }
 
@@ -32,6 +32,9 @@ public class BeveragePagerActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beverage_pager);
+
+        // Get BeverageID from the intent that just started this
+        String beverageID = (String) getIntent().getSerializableExtra(EXTRA_BEVERAGE_ID);
 
         /* GET WIDGET REFERENCES */
         mViewPager = (ViewPager) findViewById(R.id.activity_beverage_pager_view_pager);
@@ -51,6 +54,14 @@ public class BeveragePagerActivity extends FragmentActivity {
                 return mBeverageList.size();            // Just the size of the beverages list
             }
         }));
+
+        // Find the index of the beverage we are on using the beverageID we just got from the Intent that was used to call us
+        for (int i = 0; i < mBeverageList.size(); i++) {                        // Looking through all of the items in the beverage list...
+            if (mBeverageList.get(i).getID().equals(beverageID)) {                  // If the current beverage's ID is equal to the beverage ID that called us...
+                mViewPager.setCurrentItem(i);                                           // Set the ViewPager to turn to the page indicated by the index
+                break;
+            }
+        }
     }
 
 

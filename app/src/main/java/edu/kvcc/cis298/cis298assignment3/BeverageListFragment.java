@@ -60,9 +60,6 @@ public class BeverageListFragment extends Fragment {
             // There's already an adapter there - just let the adapter know that the data set changed - it will reload the data set.
             mBeverageAdapter.notifyDataSetChanged();
         }
-
-
-
     }
 
     //////////////////////////////////
@@ -105,8 +102,10 @@ public class BeverageListFragment extends Fragment {
         /* On Click Listener for ViewHolder */
         @Override
         public void onClick(View v) {
-            Intent intentToStartBeverageActivity = BeverageActivity.newIntent(getActivity(), mBeverage.getID());        // Get appropriate intent to start activity
-            startActivity(intentToStartBeverageActivity);                                                               // Actually start the activity
+            // Intent intentToStartBeverageActivity = BeverageActivity.newIntent(getActivity(), mBeverage.getID());        // Get appropriate intent to start activity
+            // startActivity(intentToStartBeverageActivity);                                                               // Actually start the activity
+            Intent intentToStartBeveragePagerActivity = BeveragePagerActivity.newIntent(getActivity(), mBeverage.getID());
+            startActivity(intentToStartBeveragePagerActivity);
         }
     }
 
